@@ -39,7 +39,7 @@ done
 
 if [ "$DEVICE_PATH" != "" ] ; then
    echo "Device Path: "$DEVICE_PATH
-   DESTINATION_TARGET=$(findmnt -rno TARGET "$DEVICE_PATH")
+   DESTINATION_TARGET=$(findmnt -rno TARGET "$DEVICE_PATH" | head -n1)
    if [ "$DESTINATION_TARGET" = "" ] ; then
       echo "Unable to find the mount point of: ""$DEVICE_PATH"
       exit 1
@@ -57,7 +57,7 @@ else
             exit 1
          else
             echo "Device Path: "$DEVICE_PATH
-            DESTINATION_TARGET=$(findmnt -rno TARGET "$DEVICE_PATH")
+            DESTINATION_TARGET=$(findmnt -rno TARGET "$DEVICE_PATH" | head -n1)
             echo "Destination Target: "$DESTINATION_TARGET
             if [ "$DESTINATION_TARGET" = "" ] ; then
                echo "Unable to find the mount point of: ""$VOLUME_LABEL"
